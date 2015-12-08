@@ -60,6 +60,7 @@ module Parser
 
     def parse_formatting(text)
       text.strip!
+      text.gsub!("&nbsp;", ' ')
       text.gsub!(/<strong>\s*<u>(.+?)<\/u>\s*<\/strong>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<u>\s*<strong>(.+?)<\/strong>\s*<\/u>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<strong>(.+?)<\/strong>/)  { "<text:span text:style-name=\"bold\">#{$1}<\/text:span>" }
