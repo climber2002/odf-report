@@ -61,6 +61,7 @@ module Parser
     def parse_formatting(text)
       text.strip!
       text.gsub!("&nbsp;", ' ')
+      process_ul(text)
       text.gsub!(/<strong>\s*<u>(.+?)<\/u>\s*<\/strong>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<u>\s*<strong>(.+?)<\/strong>\s*<\/u>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<strong>(.+?)<\/strong>/)  { "<text:span text:style-name=\"bold\">#{$1}<\/text:span>" }
@@ -68,6 +69,12 @@ module Parser
       text.gsub!(/<u>(.+?)<\/u>/)            { "<text:span text:style-name=\"underline\">#{$1}<\/text:span>" }
       text.gsub!("\n", "")
       text
+    end
+
+    def process_ul(text)
+      text.gsub!(/<ul>/, "<text:list text:style-name=\"L2\">")
+      text.gsub!(/<li>(.+?)<\/li>/) { "<text:list-item><text:p text:style-name=\"P22\">#{$1}<\/text:list-item>" }
+      text.gsub!(/<\/ul>/, "</text:list>")
     end
 
     def check_style(node)
