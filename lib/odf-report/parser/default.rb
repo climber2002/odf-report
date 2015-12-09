@@ -82,7 +82,7 @@ module Parser
       text.gsub!(/<ul>/, "")
       text.gsub!(/\n/, '')
       text.gsub!(/\r/, '')
-      text.gsub!(/<li>(.+?)<\/li>/) { "* #{$1}" }
+      text.gsub!(/<li>(.+?)<\/li>/) { "* #{$1}\r" }
       text.gsub!(/<\/ul>/, "")
     end
 
