@@ -44,12 +44,6 @@ module Parser
 
         add_paragraph(text, style)
       end
-
-      xml.css("ul").each do |p|
-        style = check_style(p)
-        text = parse_formatting(p.to_html)
-        add_paragraph(text, style)
-      end
     end
 
     def add_paragraph(text, style)
