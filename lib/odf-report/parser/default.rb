@@ -73,6 +73,8 @@ module Parser
 
     def process_ul(text)
       text.gsub!(/<ul>/, "<text:list text:style-name=\"L2\">")
+      text.gsub!(/\n/, '')
+      text.gsub!(/\r/, '')
       text.gsub!(/<li>(.+?)<\/li>/) { "<text:list-item><text:p text:style-name=\"P22\">#{$1}<\/text:list-item>" }
       text.gsub!(/<\/ul>/, "</text:list>")
     end
