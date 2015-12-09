@@ -61,13 +61,14 @@ module Parser
     def parse_formatting(text)
       text.strip!
       text.gsub!("&nbsp;", ' ')
-      process_ul(text)
+      
       text.gsub!(/<strong>\s*<u>(.+?)<\/u>\s*<\/strong>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<u>\s*<strong>(.+?)<\/strong>\s*<\/u>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<strong>(.+?)<\/strong>/)  { "<text:span text:style-name=\"bold\">#{$1}<\/text:span>" }
       text.gsub!(/<em>(.+?)<\/em>/)          { "<text:span text:style-name=\"italic\">#{$1}<\/text:span>" }
       text.gsub!(/<u>(.+?)<\/u>/)            { "<text:span text:style-name=\"underline\">#{$1}<\/text:span>" }
       text.gsub!("\n", "")
+      process_ul(text)
       text
     end
 
@@ -82,7 +83,7 @@ module Parser
       text.gsub!(/<ul>/, "")
       text.gsub!(/\n/, '')
       text.gsub!(/\r/, '')
-      text.gsub!(/<li>(.+?)<\/li>/) { "* #{$1}\r" }
+      text.gsub!(/<li>(.+?)<\/li>/) { "* #{$1}\n" }
       text.gsub!(/<\/ul>/, "")
     end
 
