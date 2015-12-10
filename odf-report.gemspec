@@ -24,6 +24,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 3.0.0"
   s.add_development_dependency "faker"
   s.add_development_dependency "launchy"
+  s.add_development_dependency "pry"
+  s.add_development_dependency "pry-byebug"
 
   s.add_runtime_dependency('rubyzip', "~> 1.1.0")
   s.add_runtime_dependency('nokogiri', ">= 1.5.0")

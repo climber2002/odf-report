@@ -13,6 +13,7 @@ class Report
     @images = {}
     @image_names_replacements = {}
     @sections = []
+    @sections_to_remove = []
 
     yield(self)
 
@@ -46,6 +47,12 @@ class Report
     yield(sec)
   end
 
+  def remove_section(section_name, opts={})
+    opts.merge!(:name => section_name)
+    sec = SectionToRemove.new(opts)
+    @sections_to_remove << sec
+  end
+
   def add_image(name, path)
     @images[name] = path
   end
@@ -67,6 +74,7 @@ class Report
           find_image_name_matches(doc)
           avoid_duplicate_image_names(doc)
 
+          @sections_to_remove.each { |s| s.replace!(doc) }
         end
 
       end
