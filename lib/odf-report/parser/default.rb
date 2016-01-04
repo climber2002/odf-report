@@ -62,15 +62,18 @@ module Parser
       text.strip!
       text.gsub!("&nbsp;", ' ')
       
-      text.gsub!(/<strong>\s*<u>(.+?)<\/u>\s*<\/strong>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
-      text.gsub!(/<u>\s*<strong>(.+?)<\/strong>\s*<\/u>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
-      text.gsub!(/<strong>(.+?)<\/strong>/)  { "<text:span text:style-name=\"bold\">#{$1}<\/text:span>" }
-      text.gsub!(/<em>(.+?)<\/em>/)          { "<text:span text:style-name=\"italic\">#{$1}<\/text:span>" }
-      text.gsub!(/<u>(.+?)<\/u>/)            { "<text:span text:style-name=\"underline\">#{$1}<\/text:span>" }
       text.gsub!("\n", "")
       text.gsub!("\r", "")
       text.gsub!("\t", "")
       text.gsub!(/<\/?br.*?>/, "")
+
+      text.gsub!(/<strong>\s*<u>(.+?)<\/u>\s*<\/strong>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
+      text.gsub!(/<u>\s*<strong>(.+?)<\/strong>\s*<\/u>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
+      text.gsub!(/<strong>(.+?)<\/strong>/)  { "<text:span text:style-name=\"bold\">#{$1}<\/text:span>" }
+      text.gsub!(/<b>(.+?)<\/b>/)  { "<text:span text:style-name=\"bold\">#{$1}<\/text:span>" }
+      text.gsub!(/<em>(.+?)<\/em>/)          { "<text:span text:style-name=\"italic\">#{$1}<\/text:span>" }
+      text.gsub!(/<u>(.+?)<\/u>/)            { "<text:span text:style-name=\"underline\">#{$1}<\/text:span>" }
+
       # process_ul(text)
       text
     end
