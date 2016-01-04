@@ -69,6 +69,7 @@ module Parser
       text.gsub!(/<u>(.+?)<\/u>/)            { "<text:span text:style-name=\"underline\">#{$1}<\/text:span>" }
       text.gsub!("\n", "")
       text.gsub!("\r", "")
+      text.gsub!("\t", "")
       text.gsub!(/<\/?br.*?>/, "")
       # process_ul(text)
       text
