@@ -27,7 +27,7 @@ module Parser
 
     def initialize(text, template_node)
       dup = text.to_s.dup
-      dup.gsub!(/<\/?br.*?>/, "")
+      dup.gsub!(/<\/?br.*?>/, "</p><p>")
       @text = dup
       @paragraphs = []
       @template_node = template_node
