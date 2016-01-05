@@ -26,7 +26,9 @@ module Parser
     attr_accessor :paragraphs
 
     def initialize(text, template_node)
-      @text = text
+      dup = text.to_s.dup
+      dup.gsub!(/<\/?br.*?>/, "")
+      @text = dup
       @paragraphs = []
       @template_node = template_node
 
@@ -65,7 +67,7 @@ module Parser
       text.gsub!("\n", "")
       text.gsub!("\r", "")
       text.gsub!("\t", "")
-      text.gsub!(/<\/?br.*?>/, "")
+      
 
       text.gsub!(/<strong>\s*<u>(.+?)<\/u>\s*<\/strong>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
       text.gsub!(/<u>\s*<strong>(.+?)<\/strong>\s*<\/u>/) { "<text:span text:style-name=\"boldunderline\">#{$1}<\/text:span>" }
